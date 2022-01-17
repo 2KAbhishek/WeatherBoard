@@ -1,1 +1,4 @@
 # Excluded files
+
+__pycache__
+.vscode
