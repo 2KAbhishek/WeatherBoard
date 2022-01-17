@@ -73,7 +73,7 @@ While building WeatherBoard the main challenges were setting up `pyenv`, finally
 
 - Re-visited `flask` after a while and relearned a few things.
 - Learned more about python environment management with `pyenv`.
-- Got to try out bulma, pretty intuitive, want to use it in future projects.
+- Got to try out `bulma`, pretty intuitive, want to use it in future projects.
 - Also tried out `chartjs` along with other plotting libraries like `plotly`.
 
 ## What's next
