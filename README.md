@@ -35,17 +35,19 @@
 
 ## What is this
 
-WeatherBoard is a `<utility/tool/feature>` that allows `<insert_target_audience>` to do `<action/task_it_does>`.
+WeatherBoard is a weather dashboard app, that tracks weather across different cities.
+
+It is a web app, that uses the OpenWeatherMap API to fetch the weather data. It has a simple and intuitive UI with support for adding and removing cities. It also has a chart that displays the weather data in a graphical format.
 
 ## Inspiration
 
-WeatherBoard was inspired by `<reason/idea>`.
+Wanted to re-visit flask and try out bulma.
 
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
 
-- You have installed the latest version of `<coding_language/dependency/requirement_1>`
+- You have installed the latest version of `python` and `pip`
 
 ## Getting WeatherBoard
 
@@ -54,47 +56,33 @@ To install WeatherBoard, follow these steps:
 ```bash
 git clone https://github.com/2kabhishek/WeatherBoard
 cd WeatherBoard
-<install_command>
-```
-
-## Using WeatherBoard
-
-```bash
-USAGE:
-    command [FLAGS] [OPTIONS]
-
-FLAGS:
-    -h, --help              Prints help information.
-
-OPTIONS:
-    -o, --option <value>    Option description.
-    Options are: a, b. [default: a]
-
-Example:
-
-
+pip install -r requirements.txt
+export FLASK_APP=app.py
+flask run
 ```
 
 ## How it was built
 
-WeatherBoard was built using `<tech/library>`
+WeatherBoard was built using `flask`, `bulma`, `chartjs`, `sqlalchemy`
 
 ## Challenges faced
 
-While building WeatherBoard the main challenges were `<issue/difficulty>`
+While building WeatherBoard the main challenges were setting up `pyenv`, finally found the solution using `pyenv global` and VSCode settings.
 
 ## What I learned
 
-While building WeatherBoard I `<learned/accomplished>` about `<learning/accomplishment>`
+- Re-visited `flask` after a while and relearned a few things.
+- Learned more about python environment management with `pyenv`.
+- Got to try out bulma, pretty intuitive, want to use it in future projects.
+- Also tried out `chartjs` along with other plotting libraries like `plotly`.
 
 ## What's next
-
-Planning to add `<feature/module>`.
 
 ### To-Do
 
 - [x] Setup repo
 - [ ] Update dependencies
+- [ ] Deploy
 
 Hit the ⭐ button if you found this useful.
 
