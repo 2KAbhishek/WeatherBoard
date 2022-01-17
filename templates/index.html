@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather Board</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css"
+        integrity="sha512-IgmDkwzs96t4SrChW29No3NXBIBv8baW490zk5aXvhCD8vuZM3yUSkbyTBcXohkySecyzIrUwiF/qV0cuPcL3Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"
+        integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <section class="hero is-info">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title">
+                    🌧️ Weather Board ☀️
+                </h1>
+                <h3 class="subtitle-7 is-offset-1">
+                    For all your weather needs!
+                </h3>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4 box">
+                    <form method="POST">
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+                                <input class="input" name="city" type="text" placeholder="City Name">
+                            </div>
+                            <div class="control">
+                                <button class="button is-info">
+                                    Add City
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <section>
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-6">
+                    {% for category, msg in messages %}
+                    <div class="notification is-{{ category }} is-light">
+                        <button class="delete"></button>
+                        {{ msg }}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    {% endwith %}
+    <section class="section">
+        <div class="container">
+            <div class="columns is-multiline">
+                {% for weather in weather_data %}
+                <div class="column is-one-third-tablet is-one-quarter-widescreen">
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-50x50">
+                                    <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <span class="title is-capitalized">{{ weather.city }}</span> <br>
+                                        <span class="subtitle">{{ weather.temperature }}° C</span> <br>
+                                        <span class="subtitle is-6 is-capitalized"> {{ weather.description }}
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                            <form method="post" action="{{ url_for('delete', city_name=weather.city) }}">
+                                <input class="button is-danger is-outlined is-small" type="submit" name="delete"
+                                    value="⨯">
+                            </form>
+                        </article>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% if weather_data|length > 1 %}
+    <section class="section">
+        <div class="container box">
+            <canvas id="myChart" width="800" height="400"></canvas>
+        </div>
+    </section>
+    {% endif %}
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                <strong>Weatherboard</strong> by <a href="https://2kabhishek.github.io">Abhishek Keshri</a>. The source
+                code is
+                hosted on <a href="https://github.com/2kabhishek/weatherboard">GitHub</a>.
+            </p>
+        </div>
+    </footer>
+    <script type="text/javascript">
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [{% for weather in weather_data %}'{{ weather.city }}',{% endfor %}],
+        datasets: [{
+            label: 'Temperature in Celsius',
+            data: [{% for weather in weather_data %}{{ weather.temperature }}, {% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.3)',
+                'rgba(54, 162, 235, 0.3)',
+                'rgba(255, 206, 86, 0.3)',
+                'rgba(75, 192, 192, 0.3)',
+                'rgba(153, 102, 255, 0.3)',
+                'rgba(255, 159, 64, 0.3)'
+            ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                    borderWidth: 1 }]},
+        options: { scales: { yAxis: { grace: 5 } } }});
+
+        document.addEventListener('DOMContentLoaded', () => {
+            (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+                const $notification = $delete.parentNode;
+
+                $delete.addEventListener('click', () => {
+                    console.log($notification);
+                    $notification.parentNode.removeChild($notification);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
