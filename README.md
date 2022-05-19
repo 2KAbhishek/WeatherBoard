@@ -26,7 +26,7 @@
 <h3>For all your weather needs! 🌧️☀️</h3>
 
 <figure>
-  <img src= "https://raw.githubusercontent.com/2KAbhishek/WeatherBoard/main/images/screenshot.png" alt="WeatherBoard Demo" style="width:100%">
+  <img src= "images/screenshot.png" alt="WeatherBoard Demo" style="width:100%">
   <br/>
   <figcaption>WeatherBoard screenshot</figcaption>
 </figure>
