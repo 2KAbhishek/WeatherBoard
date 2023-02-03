@@ -18,4 +18,4 @@ markupsafe==1.1.1
 requests==2.18.4
 sqlalchemy==1.2.6
 urllib3==1.22
-werkzeug==0.14.1
+werkzeug==0.15.5
